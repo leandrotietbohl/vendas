@@ -11,9 +11,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.mongodb.core.query.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +52,7 @@ public class ProdutoService {
         return repository.findByCreateBetween(start, end, pageable).map(this::converterEntityToDTO);
     }
 
-    public List<ProdutoEntity> findByFilter(FilterProdutoDTO dto, Pageable pageable) {
+    public Page<ProdutoDTO> findByFilter(FilterProdutoDTO dto, Pageable pageable) {
         Query query = new Query();
         query.with(pageable);
 
@@ -66,8 +66,12 @@ public class ProdutoService {
         } else if (dto.getEnd() != null) {
             query.addCriteria(Criteria.where("create").lte(dto.getEnd()));
         }
+        long count = mongoTemplate.count(query, ProdutoEntity.class);
+        List<ProdutoEntity> list = mongoTemplate.find(query, ProdutoEntity.class);
 
-        return mongoTemplate.find(query, ProdutoEntity.class);
+        return new PageImpl<ProdutoDTO>(list.stream()
+                .map(this::converterEntityToDTO)
+                .collect(Collectors.toList()), pageable, count);
     }
 
     public void delete(String id) {
