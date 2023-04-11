@@ -17,4 +17,5 @@ public class ProdutoDTO {
     private String uid;
     private String nome;
     private BigDecimal valor;
+    private String tipoMedida;
 }

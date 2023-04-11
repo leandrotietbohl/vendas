@@ -44,6 +44,16 @@ public class ProdutoController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity get(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(service.get(id));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity edit(@PathVariable String id, @RequestBody ProdutoDTO dto) {
         try {

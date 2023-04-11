@@ -22,5 +22,6 @@ public class ProdutoEntity {
     private String uid;
     private String nome;
     private BigDecimal valor;
+    private String tipoMedida;
     private LocalDateTime create = LocalDateTime.now();
 }

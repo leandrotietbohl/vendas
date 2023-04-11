@@ -54,7 +54,6 @@ public class ProdutoService {
 
     public Page<ProdutoDTO> findByFilter(FilterProdutoDTO dto, Pageable pageable) {
         Query query = new Query();
-        query.with(pageable);
 
         if (dto.getNome() != null) {
             query.addCriteria(Criteria.where("nome").regex("^" + dto.getNome()));
@@ -67,6 +66,7 @@ public class ProdutoService {
             query.addCriteria(Criteria.where("create").lte(dto.getEnd()));
         }
         long count = mongoTemplate.count(query, ProdutoEntity.class);
+        query.with(pageable);
         List<ProdutoEntity> list = mongoTemplate.find(query, ProdutoEntity.class);
 
         return new PageImpl<ProdutoDTO>(list.stream()
@@ -82,7 +82,13 @@ public class ProdutoService {
         repository.deleteAll();
     }
 
+    public ProdutoDTO get(String id) {
+        return converterEntityToDTO(repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado")));
+    }
+
     private ProdutoDTO converterEntityToDTO(ProdutoEntity entity) {
         return mapper.map(entity, ProdutoDTO.class);
     }
+
 }
