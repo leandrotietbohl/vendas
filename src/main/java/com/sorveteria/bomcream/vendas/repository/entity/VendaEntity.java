@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -20,7 +21,9 @@ import java.time.LocalDateTime;
 public class VendaEntity {
     @Id
     private String uid;
-    private String nome;
-    private BigDecimal valor;
+    private String cliente;
+    private Collection<ItemVendaEntity> itens;
+    private BigDecimal valorDesconto;
+    private BigDecimal valorTotal;
     private LocalDateTime create = LocalDateTime.now();
 }

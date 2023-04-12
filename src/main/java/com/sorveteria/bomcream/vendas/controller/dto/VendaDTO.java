@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -14,6 +16,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VendaDTO {
-    private String nome;
-    private BigDecimal valor;
+    private String uid;
+    private String cliente;
+    private Collection<ItemVendaDTO> itens;
+    private BigDecimal valorDesconto;
+    private BigDecimal valorTotal;
+    private LocalDateTime create;
 }

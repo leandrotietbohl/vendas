@@ -1,7 +1,6 @@
 package com.sorveteria.bomcream.vendas.service;
 
 import com.sorveteria.bomcream.vendas.controller.dto.VendaDTO;
-import com.sorveteria.bomcream.vendas.controller.dto.VendaOutDTO;
 import com.sorveteria.bomcream.vendas.repository.VendaRepository;
 import com.sorveteria.bomcream.vendas.repository.entity.VendaEntity;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +23,16 @@ public class VendaService {
         repository.save(mapper.map(dto, VendaEntity.class));
     }
 
-    public List<VendaOutDTO> findAll() {
+    public List<VendaDTO> findAll() {
         return ((List<VendaEntity>) repository.findAll()).stream()
                 .map(this::converterEntityToDTO).collect(Collectors.toList());
     }
 
-    public Page<VendaOutDTO> findPage(Pageable pageable) {
+    public Page<VendaDTO> findPage(Pageable pageable) {
         return repository.findAll(pageable).map(this::converterEntityToDTO);
     }
 
-    public Page<VendaOutDTO> findByFilter(LocalDateTime start, LocalDateTime end, Pageable pageable) {
+    public Page<VendaDTO> findByFilter(LocalDateTime start, LocalDateTime end, Pageable pageable) {
         return repository.findByCreateBetween(start, end, pageable).map(this::converterEntityToDTO);
     }
 
@@ -45,7 +44,7 @@ public class VendaService {
         repository.deleteAll();
     }
 
-    private VendaOutDTO converterEntityToDTO(VendaEntity entity) {
-        return mapper.map(entity, VendaOutDTO.class);
+    private VendaDTO converterEntityToDTO(VendaEntity entity) {
+        return mapper.map(entity, VendaDTO.class);
     }
 }
