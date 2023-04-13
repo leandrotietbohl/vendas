@@ -23,5 +23,6 @@ public class ProdutoEntity {
     private String nome;
     private BigDecimal valor;
     private String tipoMedida;
+    private String categoria;
     private LocalDateTime create = LocalDateTime.now();
 }
