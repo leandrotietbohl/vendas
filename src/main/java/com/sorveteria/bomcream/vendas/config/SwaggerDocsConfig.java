@@ -31,7 +31,7 @@ public class SwaggerDocsConfig {
 
     private ApiInfo getApiInfo() {
         return new ApiInfo(
-                "E-Social API Documentation",
+                "API Documentation",
                 "Api de vendas sorveteria.",
                 " 1.0",
                 "TERMS OF SERVICE URL",
