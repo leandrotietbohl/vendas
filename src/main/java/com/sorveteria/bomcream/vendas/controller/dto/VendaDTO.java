@@ -1,6 +1,5 @@
 package com.sorveteria.bomcream.vendas.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +21,8 @@ public class VendaDTO {
     private Collection<ItemVendaDTO> itens;
     private BigDecimal valorDesconto;
     private BigDecimal valorTotal;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private BigDecimal valorPago;
+    private BigDecimal valorTroco;
+    private String formaPagamento;
     private LocalDateTime create;
 }

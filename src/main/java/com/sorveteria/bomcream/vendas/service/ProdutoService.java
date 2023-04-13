@@ -35,6 +35,7 @@ public class ProdutoService {
 
         entity.setNome(dto.getNome());
         entity.setValor(dto.getValor());
+        entity.setTipoMedida(dto.getTipoMedida());
 
         repository.save(entity);
     }

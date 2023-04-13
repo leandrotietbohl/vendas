@@ -25,5 +25,8 @@ public class VendaEntity {
     private Collection<ItemVendaEntity> itens;
     private BigDecimal valorDesconto;
     private BigDecimal valorTotal;
+    private BigDecimal valorPago;
+    private BigDecimal valorTroco;
+    private String formaPagamento;
     private LocalDateTime create = LocalDateTime.now();
 }
