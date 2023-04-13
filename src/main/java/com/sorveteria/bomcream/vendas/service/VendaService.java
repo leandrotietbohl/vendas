@@ -33,7 +33,11 @@ public class VendaService {
     }
 
     public Page<VendaDTO> findByFilter(LocalDateTime start, LocalDateTime end, Pageable pageable) {
-        return repository.findByCreateBetween(start, end, pageable).map(this::converterEntityToDTO);
+        if (start != null && end != null) {
+            return repository.findByCreateBetween(start, end, pageable).map(this::converterEntityToDTO);
+        } else {
+            return repository.findAll(pageable).map(this::converterEntityToDTO);
+        }
     }
 
     public void delete(String id) {
