@@ -40,6 +40,22 @@ public class VendaService {
         }
     }
 
+    public List<VendaDTO> findByFilter(LocalDateTime start, LocalDateTime end) {
+        if (start != null && end != null) {
+            return repository.findAllByCreateBetween(start, end).stream().map(this::converterEntityToDTO)
+                    .collect(Collectors.toList());
+        } else if (start != null) {
+            return repository.findAllByCreateAfter(start).stream().map(this::converterEntityToDTO)
+                    .collect(Collectors.toList());
+        } else if (end != null) {
+            return repository.findAllByCreateBefore(end).stream().map(this::converterEntityToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return ((List<VendaEntity>) repository.findAll()).stream().map(this::converterEntityToDTO)
+                    .collect(Collectors.toList());
+        }
+    }
+
     public void delete(String id) {
         repository.deleteById(id);
     }

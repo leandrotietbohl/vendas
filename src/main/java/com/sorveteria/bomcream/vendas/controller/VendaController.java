@@ -31,6 +31,11 @@ public class VendaController {
                 PageRequest.of(page, size)));
     }
 
+    @PostMapping("/filter_all")
+    public ResponseEntity listByFilter(@RequestBody FilterVendaDTO dto) {
+        return ResponseEntity.ok(service.findByFilter(dto.getStart(), dto.getEnd()));
+    }
+
     @PostMapping
     public ResponseEntity create(@RequestBody VendaDTO dto) {
         service.create(dto);
