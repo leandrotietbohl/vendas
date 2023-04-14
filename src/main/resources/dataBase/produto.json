@@ -1,0 +1,128 @@
+[
+  {
+    "uid": "6438746b65a0346eb22756d0",
+    "nome": "Casquinha",
+    "valor": 4,
+    "tipoMedida": "Unidade",
+    "categoria": "expresso"
+  },
+  {
+    "uid": "6438749165a0346eb22756d1",
+    "nome": "Cascão",
+    "valor": 6,
+    "tipoMedida": "Unidade",
+    "categoria": "expresso"
+  },
+  {
+    "uid": "643874af65a0346eb22756d2",
+    "nome": "Milkshake 250 ml",
+    "valor": 6,
+    "tipoMedida": "Unidade",
+    "categoria": "milk"
+  },
+  {
+    "uid": "643877a865a0346eb22756d3",
+    "nome": "Milkshake 330 ml",
+    "valor": 8,
+    "tipoMedida": "Unidade",
+    "categoria": "milk"
+  },
+  {
+    "uid": "643877b565a0346eb22756d4",
+    "nome": "Milkshake 550 ml",
+    "valor": 12,
+    "tipoMedida": "Unidade",
+    "categoria": "milk"
+  },
+  {
+    "uid": "6438a80b789acf41ad9b97a4",
+    "nome": "Casquinha",
+    "valor": 5,
+    "tipoMedida": "Unidade",
+    "categoria": "artesanal"
+  },
+  {
+    "uid": "6438aab1789acf41ad9b97a5",
+    "nome": "Copinho",
+    "valor": 4,
+    "tipoMedida": "Unidade",
+    "categoria": "expresso"
+  },
+  {
+    "uid": "6438aac4789acf41ad9b97a6",
+    "nome": "Copão",
+    "valor": 6,
+    "tipoMedida": "Unidade",
+    "categoria": "expresso"
+  },
+  {
+    "uid": "6438ab03789acf41ad9b97a7",
+    "nome": "Açaí 250ml",
+    "valor": 10,
+    "tipoMedida": "Unidade",
+    "categoria": "acai"
+  },
+  {
+    "uid": "6438ab1a789acf41ad9b97a8",
+    "nome": "Açaí 550ml",
+    "valor": 20,
+    "tipoMedida": "Unidade",
+    "categoria": "acai"
+  },
+  {
+    "uid": "6438ab28789acf41ad9b97a9",
+    "nome": "Açai 330ml",
+    "valor": 15,
+    "tipoMedida": "Unidade",
+    "categoria": "acai"
+  },
+  {
+    "uid": "6438ab7c789acf41ad9b97aa",
+    "nome": "Casquinha",
+    "valor": 5,
+    "tipoMedida": "Unidade",
+    "categoria": "artesanal"
+  },
+  {
+    "uid": "6438ab88789acf41ad9b97ab",
+    "nome": "Casção",
+    "valor": 6,
+    "tipoMedida": "Unidade",
+    "categoria": "artesanal"
+  },
+  {
+    "uid": "6438aba6789acf41ad9b97ac",
+    "nome": "Buffet",
+    "valor": 59.9,
+    "tipoMedida": "Kilograma",
+    "categoria": "artesanal"
+  },
+  {
+    "uid": "6438abd7789acf41ad9b97ad",
+    "nome": "Crepe simples",
+    "valor": 8,
+    "tipoMedida": "Unidade",
+    "categoria": "crepe"
+  },
+  {
+    "uid": "6438ac00789acf41ad9b97ae",
+    "nome": "Crepe duplo",
+    "valor": 13,
+    "tipoMedida": "Unidade",
+    "categoria": "crepe"
+  },
+  {
+    "uid": "6438ac0e789acf41ad9b97af",
+    "nome": "Crepe triplo",
+    "valor": 16,
+    "tipoMedida": "Unidade",
+    "categoria": "crepe"
+  },
+  {
+    "uid": "6438ac70789acf41ad9b97b0",
+    "nome": "Aleatório",
+    "valor": 0,
+    "tipoMedida": "Aleatorio",
+    "categoria": "aleatorio"
+  }
+]

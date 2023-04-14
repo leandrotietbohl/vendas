@@ -26,7 +26,11 @@ public class ProdutoService {
     private final ModelMapper mapper;
 
     public void create(ProdutoDTO dto) {
-        repository.save(mapper.map(dto, ProdutoEntity.class));
+        repository.save(converterDTOToEntity(dto));
+    }
+
+    public void createAll(List<ProdutoDTO> list) {
+        repository.saveAll(list.stream().map(this::converterDTOToEntity).collect(Collectors.toList()));
     }
 
     public void edit(ProdutoDTO dto, String id) {
@@ -91,6 +95,10 @@ public class ProdutoService {
 
     private ProdutoDTO converterEntityToDTO(ProdutoEntity entity) {
         return mapper.map(entity, ProdutoDTO.class);
+    }
+
+    private ProdutoEntity converterDTOToEntity(ProdutoDTO dto) {
+        return mapper.map(dto, ProdutoEntity.class);
     }
 
 }

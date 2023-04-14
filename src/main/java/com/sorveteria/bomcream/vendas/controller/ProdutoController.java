@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/produto")
 @RequiredArgsConstructor
@@ -33,7 +35,7 @@ public class ProdutoController {
 
     @PostMapping("/filter2")
     public ResponseEntity pageByFilter2(@RequestParam Integer page, @RequestParam Integer size,
-                                       @RequestBody FilterProdutoDTO dto) {
+                                        @RequestBody FilterProdutoDTO dto) {
         return ResponseEntity.ok(service.findByFilter(dto,
                 PageRequest.of(page, size)));
     }
@@ -41,6 +43,12 @@ public class ProdutoController {
     @PostMapping
     public ResponseEntity create(@RequestBody ProdutoDTO dto) {
         service.create(dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity createAll(@RequestBody List<ProdutoDTO> list) {
+        service.createAll(list);
         return ResponseEntity.ok().build();
     }
 
