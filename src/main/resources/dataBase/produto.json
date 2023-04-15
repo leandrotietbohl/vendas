@@ -78,7 +78,7 @@
   },
   {
     "uid": "6438ab7c789acf41ad9b97aa",
-    "nome": "Casquinha",
+    "nome": "Copinho",
     "valor": 5,
     "tipoMedida": "Unidade",
     "categoria": "artesanal"
@@ -124,5 +124,12 @@
     "valor": 0,
     "tipoMedida": "Aleatorio",
     "categoria": "aleatorio"
+  },
+  {
+    "uid": "643adf753eccb016fded0d25",
+    "nome": "Copão",
+    "valor": 8,
+    "tipoMedida": "Unidade",
+    "categoria": "artesanal"
   }
 ]
