@@ -1,0 +1,38 @@
+[
+  {
+    "uid": "expresso",
+    "nome": "Expresso",
+    "tipo": "visivel",
+    "ordem": 1
+  },
+  {
+    "uid": "milk",
+    "nome": "Milkshake",
+    "tipo": "visivel",
+    "ordem": 2
+  },
+  {
+    "uid": "artesanal",
+    "nome": "Artesanal",
+    "tipo": "visivel",
+    "ordem": 3
+  },
+  {
+    "uid": "acai",
+    "nome": "Açaí",
+    "tipo": "visivel",
+    "ordem": 4
+  },
+  {
+    "uid": "crepe",
+    "nome": "Crepe",
+    "tipo": "visivel",
+    "ordem": 5
+  },
+  {
+    "uid": "aleatorio",
+    "nome": "Aleatório",
+    "tipo": "visivel",
+    "ordem": 6
+  }
+]
