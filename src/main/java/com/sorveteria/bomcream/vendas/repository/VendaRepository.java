@@ -18,4 +18,6 @@ public interface VendaRepository extends PagingAndSortingRepository<VendaEntity,
     public List<VendaEntity> findAllByCreateAfter(LocalDateTime start);
 
     public List<VendaEntity> findAllByCreateBefore(LocalDateTime end);
+
+    public List<VendaEntity> findAllByCaixa(String caixa);
 }

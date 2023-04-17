@@ -17,6 +17,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class VendaDTO {
     private String uid;
+    private String caixa;
     private String cliente;
     private Collection<ItemVendaDTO> itens;
     private BigDecimal valorDesconto;

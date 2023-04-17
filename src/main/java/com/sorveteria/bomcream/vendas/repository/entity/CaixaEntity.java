@@ -17,17 +17,15 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "venda")
-public class VendaEntity {
+@Document(collection = "caixa")
+public class CaixaEntity {
     @Id
     private String uid;
-    private String caixa;
-    private String cliente;
-    private Collection<ItemVendaEntity> itens;
-    private BigDecimal valorDesconto;
-    private BigDecimal valorTotal;
-    private BigDecimal valorPago;
-    private BigDecimal valorTroco;
-    private String formaPagamento;
-    private LocalDateTime create = LocalDateTime.now();
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private String userInicio;
+    private String userFim;
+    private BigDecimal valorInicioDinheiro;
+    private BigDecimal valorFimDinheiro;
+
 }
