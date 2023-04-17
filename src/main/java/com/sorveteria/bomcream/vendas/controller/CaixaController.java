@@ -1,14 +1,10 @@
 package com.sorveteria.bomcream.vendas.controller;
 
 import com.sorveteria.bomcream.vendas.controller.dto.CaixaInDTO;
-import com.sorveteria.bomcream.vendas.controller.dto.CategoriaDTO;
 import com.sorveteria.bomcream.vendas.service.CaixaService;
-import com.sorveteria.bomcream.vendas.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/caixa")
@@ -19,11 +15,10 @@ public class CaixaController {
     @PostMapping("/abrir")
     public ResponseEntity abrirCaixa(@RequestBody CaixaInDTO dto) {
         try {
-            service.abrir(dto);
+            return ResponseEntity.ok(service.abrir(dto));
         } catch (RuntimeException e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/fechar")
@@ -39,6 +34,12 @@ public class CaixaController {
     @GetMapping("/get")
     public ResponseEntity findCaixaAberto() {
         return ResponseEntity.ok(service.findCaixaAberto());
+    }
+
+
+    @GetMapping("/last")
+    public ResponseEntity findUltimoCaixa() {
+        return ResponseEntity.ok(service.findUltimoCaixa());
     }
 
     @GetMapping("/all")

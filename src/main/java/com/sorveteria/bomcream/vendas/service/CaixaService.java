@@ -23,7 +23,7 @@ public class CaixaService {
     private final ModelMapper mapper;
 
 
-    public void abrir(CaixaInDTO dto) {
+    public CaixaOutDTO abrir(CaixaInDTO dto) {
         if (dto.getInicio() == null || dto.getUser() == null) {
             throw new RuntimeException("Data inicio e Usuario não podem ser nulos");
         }
@@ -40,7 +40,7 @@ public class CaixaService {
         } else {
             novoCaixa.setValorInicioDinheiro(BigDecimal.ZERO);
         }
-        repository.save(novoCaixa);
+        return converterEntityToDTO(repository.save(novoCaixa));
     }
 
     public void fechar(CaixaInDTO dto) {
@@ -54,7 +54,7 @@ public class CaixaService {
         caixa.setUserFim(dto.getUser());
         List<VendaEntity> vendas = vendaRepository.findAllByCaixa(caixa.getUid());
 
-        BigDecimal sumDinheiro = BigDecimal.ZERO;
+        BigDecimal sumDinheiro = caixa.getValorInicioDinheiro();
         if (vendas != null) {
             BigDecimal valorPago = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
                     .mapToDouble(v -> v.getValorPago().doubleValue()).sum());
@@ -69,6 +69,10 @@ public class CaixaService {
 
     public CaixaOutDTO findCaixaAberto() {
         return converterEntityToDTO(repository.findFirstByFimIsNull());
+    }
+
+    public CaixaOutDTO findUltimoCaixa() {
+        return converterEntityToDTO(repository.findFirstByFimIsNotNull(Sort.by(Sort.Direction.DESC, "fim")));
     }
 
     public List<CaixaOutDTO> findAll() {
