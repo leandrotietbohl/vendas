@@ -1,6 +1,7 @@
 package com.sorveteria.bomcream.vendas.controller;
 
 import com.sorveteria.bomcream.vendas.controller.dto.CaixaInDTO;
+import com.sorveteria.bomcream.vendas.controller.dto.LancamentoDTO;
 import com.sorveteria.bomcream.vendas.service.CaixaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,21 @@ public class CaixaController {
         return ResponseEntity.ok(service.findCaixaAberto());
     }
 
+    @GetMapping("/vendas/{id}")
+    public ResponseEntity findVendasByCaixa(@PathVariable String id) {
+        return ResponseEntity.ok(service.findVendasByCaixa(id));
+    }
+
+    @GetMapping("/lancamentos/{id}")
+    public ResponseEntity findLancamentoByCaixa(@PathVariable String id) {
+        return ResponseEntity.ok(service.findLancamentoByCaixa(id));
+    }
+
+    @PostMapping("/lancamentos/")
+    public ResponseEntity addLancamento(@RequestBody LancamentoDTO dto) {
+        service.addLancamento(dto);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/last")
     public ResponseEntity findUltimoCaixa() {

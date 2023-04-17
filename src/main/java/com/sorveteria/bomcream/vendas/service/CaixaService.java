@@ -2,9 +2,13 @@ package com.sorveteria.bomcream.vendas.service;
 
 import com.sorveteria.bomcream.vendas.controller.dto.CaixaInDTO;
 import com.sorveteria.bomcream.vendas.controller.dto.CaixaOutDTO;
+import com.sorveteria.bomcream.vendas.controller.dto.LancamentoDTO;
+import com.sorveteria.bomcream.vendas.controller.dto.VendaDTO;
 import com.sorveteria.bomcream.vendas.repository.CaixaRepository;
+import com.sorveteria.bomcream.vendas.repository.LancamentoRepository;
 import com.sorveteria.bomcream.vendas.repository.VendaRepository;
 import com.sorveteria.bomcream.vendas.repository.entity.CaixaEntity;
+import com.sorveteria.bomcream.vendas.repository.entity.LancamenntoCaixaEntity;
 import com.sorveteria.bomcream.vendas.repository.entity.VendaEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +24,7 @@ import java.util.stream.Collectors;
 public class CaixaService {
     private final CaixaRepository repository;
     private final VendaRepository vendaRepository;
+    private final LancamentoRepository lancamentoRepository;
     private final ModelMapper mapper;
 
 
@@ -67,6 +72,20 @@ public class CaixaService {
         repository.save(caixa);
     }
 
+    public void addLancamento(LancamentoDTO dto) {
+        lancamentoRepository.save(converterDTOToEntity(dto));
+    }
+
+    public List<LancamentoDTO> findLancamentoByCaixa(String uidCaixa) {
+        return lancamentoRepository.findAllByCaixaOrderByCreate(uidCaixa).stream()
+                .map(this::converterEntityToDTO).collect(Collectors.toList());
+    }
+
+    public List<VendaDTO> findVendasByCaixa(String uidCaixa) {
+        return vendaRepository.findAllByCaixaOrderByCreate(uidCaixa).stream()
+                .map(this::converterEntityToDTO).collect(Collectors.toList());
+    }
+
     public CaixaOutDTO findCaixaAberto() {
         return converterEntityToDTO(repository.findFirstByFimIsNull());
     }
@@ -76,7 +95,8 @@ public class CaixaService {
     }
 
     public List<CaixaOutDTO> findAll() {
-        return ((List<CaixaEntity>) repository.findAll()).stream().map(this::converterEntityToDTO).collect(Collectors.toList());
+        return ((List<CaixaEntity>) repository.findAll()).stream()
+                .map(this::converterEntityToDTO).collect(Collectors.toList());
     }
 
     public void delete(String id) {
@@ -93,5 +113,17 @@ public class CaixaService {
         } else {
             return null;
         }
+    }
+
+    private VendaDTO converterEntityToDTO(VendaEntity entity) {
+        return mapper.map(entity, VendaDTO.class);
+    }
+
+    private LancamentoDTO converterEntityToDTO(LancamenntoCaixaEntity entity) {
+        return mapper.map(entity, LancamentoDTO.class);
+    }
+
+    private LancamenntoCaixaEntity converterDTOToEntity(LancamentoDTO entity) {
+        return mapper.map(entity, LancamenntoCaixaEntity.class);
     }
 }
