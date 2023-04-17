@@ -30,7 +30,7 @@ public class CaixaService {
         if (repository.existsByFimIsNull()) {
             throw new RuntimeException("Já existe um caixa aberto, feche o anterio para abrir o novo");
         }
-        CaixaEntity caixaAnterior = repository.findFirstByFimIsNotNull(Sort.by(Sort.Direction.DESC,"fim"));
+        CaixaEntity caixaAnterior = repository.findFirstByFimIsNotNull(Sort.by(Sort.Direction.DESC, "fim"));
         CaixaEntity novoCaixa = CaixaEntity.builder()
                 .userInicio(dto.getUser())
                 .inicio(dto.getInicio())
@@ -56,8 +56,11 @@ public class CaixaService {
 
         BigDecimal sumDinheiro = BigDecimal.ZERO;
         if (vendas != null) {
-            vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro")).forEach(v -> sumDinheiro.add(v.getValorPago()));
-            vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro")).forEach(v -> sumDinheiro.subtract(v.getValorTroco()));
+            BigDecimal valorPago = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
+                    .mapToDouble(v -> v.getValorPago().doubleValue()).sum());
+            BigDecimal valorTroco = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
+                    .mapToDouble(v -> v.getValorTroco().doubleValue()).sum());
+            sumDinheiro = sumDinheiro.add(valorPago).subtract(valorTroco);
         }
         caixa.setValorFimDinheiro(sumDinheiro);
 
