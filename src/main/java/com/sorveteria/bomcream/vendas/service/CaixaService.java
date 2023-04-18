@@ -57,7 +57,7 @@ public class CaixaService {
 
         caixa.setFim(dto.getFim());
         caixa.setUserFim(dto.getUser());
-        if (dto.getValorFimDinheiro() != null) {
+        if (dto.getValorFimDinheiro() == null) {
             List<VendaEntity> vendas = vendaRepository.findAllByCaixa(caixa.getUid());
             List<LancamenntoCaixaEntity> lancamentos = lancamentoRepository.findAllByCaixaOrderByCreate(caixa.getUid());
 
