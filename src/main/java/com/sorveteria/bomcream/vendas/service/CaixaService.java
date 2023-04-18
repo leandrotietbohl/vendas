@@ -57,17 +57,29 @@ public class CaixaService {
 
         caixa.setFim(dto.getFim());
         caixa.setUserFim(dto.getUser());
-        List<VendaEntity> vendas = vendaRepository.findAllByCaixa(caixa.getUid());
+        if (dto.getValorFimDinheiro() != null) {
+            List<VendaEntity> vendas = vendaRepository.findAllByCaixa(caixa.getUid());
+            List<LancamenntoCaixaEntity> lancamentos = lancamentoRepository.findAllByCaixaOrderByCreate(caixa.getUid());
 
-        BigDecimal sumDinheiro = caixa.getValorInicioDinheiro();
-        if (vendas != null) {
-            BigDecimal valorPago = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
-                    .mapToDouble(v -> v.getValorPago().doubleValue()).sum());
-            BigDecimal valorTroco = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
-                    .mapToDouble(v -> v.getValorTroco().doubleValue()).sum());
-            sumDinheiro = sumDinheiro.add(valorPago).subtract(valorTroco);
+            BigDecimal sumDinheiro = caixa.getValorInicioDinheiro();
+            if (vendas != null) {
+                BigDecimal valorPago = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
+                        .mapToDouble(v -> v.getValorPago().doubleValue()).sum());
+                BigDecimal valorTroco = BigDecimal.valueOf(vendas.stream().filter(v -> v.getFormaPagamento().equals("Dinheiro"))
+                        .mapToDouble(v -> v.getValorTroco().doubleValue()).sum());
+                sumDinheiro = sumDinheiro.add(valorPago).subtract(valorTroco);
+            }
+            if (lancamentos != null) {
+                BigDecimal valorAdicionado = BigDecimal.valueOf(lancamentos.stream().filter(v -> v.getTipo().equals("Credito"))
+                        .mapToDouble(v -> v.getValor().doubleValue()).sum());
+                BigDecimal valorRetirado = BigDecimal.valueOf(lancamentos.stream().filter(v -> v.getTipo().equals("Debito"))
+                        .mapToDouble(v -> v.getValor().doubleValue()).sum());
+                sumDinheiro = sumDinheiro.add(valorAdicionado).subtract(valorRetirado);
+            }
+            caixa.setValorFimDinheiro(sumDinheiro);
+        } else {
+            caixa.setValorFimDinheiro(dto.getValorFimDinheiro());
         }
-        caixa.setValorFimDinheiro(sumDinheiro);
 
         repository.save(caixa);
     }
