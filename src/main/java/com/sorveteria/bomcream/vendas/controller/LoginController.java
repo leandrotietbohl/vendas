@@ -1,18 +1,16 @@
 package com.sorveteria.bomcream.vendas.controller;
 
-import com.sorveteria.bomcream.vendas.controller.dto.CategoriaDTO;
-import com.sorveteria.bomcream.vendas.service.CategoriaService;
+import com.sorveteria.bomcream.vendas.controller.dto.LoginDTO;
+import com.sorveteria.bomcream.vendas.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/v1/categoria")
+@RequestMapping("/v1/login")
 @RequiredArgsConstructor
-public class CategoriaController {
-    private final CategoriaService service;
+public class LoginController {
+    private final UsuarioService service;
 
     @GetMapping("/all")
     public ResponseEntity listAll() {
@@ -20,15 +18,14 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody CategoriaDTO dto) {
+    public ResponseEntity create(@RequestBody LoginDTO dto) {
         service.create(dto);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/all")
-    public ResponseEntity createAll(@RequestBody List<CategoriaDTO> list) {
-        service.createAll(list);
-        return ResponseEntity.ok().build();
+    @PostMapping("/valida")
+    public ResponseEntity valida(@RequestBody LoginDTO dto) {
+        return ResponseEntity.ok(service.validaLogin(dto.getLogin(), dto.getPass()));
     }
 
     @GetMapping("/{id}")
@@ -38,17 +35,6 @@ public class CategoriaController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity edit(@PathVariable String id, @RequestBody CategoriaDTO dto) {
-        try {
-            service.edit(dto, id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
-
     }
 
     @DeleteMapping("/{id}")
