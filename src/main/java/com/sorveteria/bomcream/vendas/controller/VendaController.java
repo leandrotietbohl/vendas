@@ -42,6 +42,16 @@ public class VendaController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity edit(@PathVariable String id, @RequestBody VendaDTO dto) {
+        try {
+            service.edit(dto, id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable String id) {
         service.delete(id);

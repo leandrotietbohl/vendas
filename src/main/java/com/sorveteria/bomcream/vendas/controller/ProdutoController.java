@@ -70,7 +70,6 @@ public class ProdutoController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
-
     }
 
     @DeleteMapping("/{id}")

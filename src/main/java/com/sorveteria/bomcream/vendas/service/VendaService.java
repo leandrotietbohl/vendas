@@ -23,6 +23,17 @@ public class VendaService {
         repository.save(mapper.map(dto, VendaEntity.class));
     }
 
+    public void edit(VendaDTO dto, String id) {
+        VendaEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
+
+        entity.setFormaPagamento(dto.getFormaPagamento());
+        entity.setValorPago(dto.getValorPago());
+        entity.setValorTroco(dto.getValorTroco());
+
+        repository.save(entity);
+    }
+
     public List<VendaDTO> findAll() {
         return ((List<VendaEntity>) repository.findAll()).stream()
                 .map(this::converterEntityToDTO).collect(Collectors.toList());
