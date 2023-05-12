@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemVendaEntity {
-    ProdutoEntity produto;
-    BigDecimal quantidade;
-    BigDecimal valorItem;
+    private ProdutoEntity produto;
+    private BigDecimal quantidade;
+    private BigDecimal valorItem;
 }
