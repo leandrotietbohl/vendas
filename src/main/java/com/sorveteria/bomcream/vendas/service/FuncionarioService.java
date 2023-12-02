@@ -53,6 +53,7 @@ public class FuncionarioService {
                 .numero(m.getCodigoMes())
                 .mes(m.getNomeMesCompleto())
                 .dias(criaDiasMes(m.getCodigoMes()))
+                .valorMes(BigDecimal.ZERO)
                 .build()));
         return meses;
     }
@@ -62,8 +63,8 @@ public class FuncionarioService {
         int ultimoDiaMes = LocalDate.of(LocalDate.now().getYear(), codigoMes, 1).lengthOfMonth();
         dias = IntStream.range(0, ultimoDiaMes).mapToObj(d -> DiaTrabalhoEntity.builder()
                 .dia(d + 1)
-                .valorPeriodo1(BigDecimal.ZERO)
-                .valorPeriodo2(BigDecimal.ZERO)
+                .valorTrabalho(BigDecimal.ZERO)
+                .valorTotalDia(BigDecimal.ZERO)
                 .build()).collect(Collectors.toList());
         return dias;
     }
@@ -84,5 +85,9 @@ public class FuncionarioService {
         return ((List<FuncionarioEntity>) repository.findAll()).stream()
                 .map(f -> mapper.map(f, FuncionarioDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public void edit(FuncionarioDTO dto, String id) {
+        repository.save(mapper.map(dto, FuncionarioEntity.class));
     }
 }

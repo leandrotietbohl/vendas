@@ -1,5 +1,6 @@
 package com.sorveteria.bomcream.vendas.controller;
 
+import com.sorveteria.bomcream.vendas.controller.dto.CategoriaDTO;
 import com.sorveteria.bomcream.vendas.controller.dto.FuncionarioDTO;
 import com.sorveteria.bomcream.vendas.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,17 @@ public class FuncionarioController {
         } catch (RuntimeException e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity edit(@PathVariable String id, @RequestBody FuncionarioDTO dto) {
+        try {
+            service.edit(dto, id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+
     }
 
     @DeleteMapping("/{id}")

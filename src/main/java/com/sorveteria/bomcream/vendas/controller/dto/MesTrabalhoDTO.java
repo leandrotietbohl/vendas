@@ -2,6 +2,7 @@ package com.sorveteria.bomcream.vendas.controller.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -13,4 +14,5 @@ public class MesTrabalhoDTO {
     private int numero;
     private String mes;
     private List<DiaTrabalhoDTO> dias;
+    private BigDecimal valorMes;
 }

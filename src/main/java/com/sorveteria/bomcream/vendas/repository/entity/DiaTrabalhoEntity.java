@@ -3,7 +3,6 @@ package com.sorveteria.bomcream.vendas.repository.entity;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -12,10 +11,11 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class DiaTrabalhoEntity {
     private int dia;
-    private LocalTime horaInicio1;
-    private LocalTime horaFim1;
-    private BigDecimal valorPeriodo1;
-    private LocalTime horaInicio2;
-    private LocalTime horaFim2;
-    private BigDecimal valorPeriodo2;
+    private String horaInicio1;
+    private String horaFim1;
+    private String horaInicio2;
+    private String horaFim2;
+    private BigDecimal valorTrabalho;
+    private BigDecimal valorVale;
+    private BigDecimal valorTotalDia;
 }
