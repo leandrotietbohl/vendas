@@ -97,6 +97,8 @@ public class FuncionarioService {
 
         if (entity.getAnos().stream().anyMatch(a-> a.getAno() == ano)) {
             throw new RuntimeException("Ano já cadastrado no funcionario");
+        } else if(ano < LocalDate.now().getYear()) {
+            throw new RuntimeException("Ano deve ser maior que ano atual");
         } else {
             entity.getAnos().addAll(criaAno(ano));
         }
