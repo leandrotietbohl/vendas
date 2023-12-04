@@ -33,15 +33,15 @@ public class FuncionarioService {
                     .cpf(dto.getCpf())
                     .nome(dto.getNome())
                     .valorHora(dto.getValorHora())
-                    .anos(criaAno())
+                    .anos(criaAno(LocalDate.now().getYear()))
                     .build();
             return mapper.map(repository.save(entity), FuncionarioDTO.class);
         }
     }
 
-    private List<AnoTrabalhoEntity> criaAno() {
+    private List<AnoTrabalhoEntity> criaAno(int ano) {
         AnoTrabalhoEntity anoAtual = AnoTrabalhoEntity.builder()
-                .ano(LocalDate.now().getYear())
+                .ano(ano)
                 .meses(criaMeses())
                 .build();
         return List.of(anoAtual);
@@ -89,5 +89,18 @@ public class FuncionarioService {
 
     public void edit(FuncionarioDTO dto, String id) {
         repository.save(mapper.map(dto, FuncionarioEntity.class));
+    }
+
+    public FuncionarioDTO addAno(int ano, String id) {
+        FuncionarioEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionario não encontrado."));
+
+        if (entity.getAnos().stream().anyMatch(a-> a.getAno() == ano)) {
+            throw new RuntimeException("Ano já cadastrado no funcionario");
+        } else {
+            entity.getAnos().addAll(criaAno(ano));
+        }
+        repository.save(entity);
+        return mapper.map(entity, FuncionarioDTO.class);
     }
 }

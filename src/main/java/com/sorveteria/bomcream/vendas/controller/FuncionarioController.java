@@ -35,7 +35,16 @@ public class FuncionarioController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
+    }
 
+    @PutMapping("/addAno/{id}")
+    public ResponseEntity addAno(@PathVariable String id, @RequestParam int ano) {
+        try {
+
+            return ResponseEntity.ok(service.addAno(ano, id));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
